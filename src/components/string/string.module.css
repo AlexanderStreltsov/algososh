@@ -1,0 +1,24 @@
+.form {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.form > div {
+  width: 377px;
+}
+
+.form button {
+  width: 140px;
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  width: 100%;
+  margin-top: 146px;
+}
