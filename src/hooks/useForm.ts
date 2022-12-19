@@ -1,32 +1,25 @@
 import { useState, ChangeEvent } from "react";
 
-type TInputValues = {
-  [name: string]: string;
+type TFormInputs = {
+  [name: string]: {
+    value: string;
+    pattern?: RegExp;
+  };
 };
 
-const useForm = (inputValues: TInputValues) => {
+const useForm = (inputValues: TFormInputs) => {
   const [values, setValues] = useState(inputValues);
-  const [isEmpty, setEmpty] = useState(true);
-
-  const checkEmpty = (values: TInputValues) => {
-    let check = false;
-    for (const [, value] of Object.entries(values)) {
-      if (!value) {
-        check = true;
-        break;
-      }
-    }
-    setEmpty(check);
-  };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    const changedValues = { ...values, [name]: value };
-    setValues(changedValues);
-    checkEmpty(changedValues);
+    const { pattern } = values[name];
+
+    if ((pattern && pattern.test(value)) || !value || !pattern) {
+      setValues({ ...values, [name]: { value: value.trim(), pattern } });
+    }
   };
 
-  return { values, setValues, isEmpty, setEmpty, handleChange };
+  return { values, setValues, handleChange };
 };
 
 export default useForm;

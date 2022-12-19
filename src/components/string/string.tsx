@@ -8,11 +8,14 @@ import { Circle } from "../ui/circle/circle";
 import { type TDisplayingElement, showReverseString } from "./utils";
 
 const defaultInputValues = {
-  string: "",
+  string: {
+    value: "",
+  },
 };
 
 export const StringComponent: React.FC = () => {
-  const { values, isEmpty, handleChange } = useForm(defaultInputValues);
+  const { values, handleChange } = useForm(defaultInputValues);
+  const { value } = values["string"];
 
   const [displayingElements, setDisplaying] = useState<
     Array<TDisplayingElement>
@@ -21,7 +24,7 @@ export const StringComponent: React.FC = () => {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    showReverseString(values["string"], setDisplaying, setLoading);
+    showReverseString(value, setDisplaying, setLoading);
   };
 
   return (
@@ -29,17 +32,18 @@ export const StringComponent: React.FC = () => {
       <form className={styles.form} onSubmit={handleSubmit}>
         <Input
           name="string"
-          value={values["string"]}
+          value={value}
           maxLength={11}
           onChange={handleChange}
           disabled={isLoading}
           isLimitText
+          autoFocus
         />
         <Button
           text="Развернуть"
           type="submit"
           isLoader={isLoading}
-          disabled={isEmpty || isLoading}
+          disabled={!value || isLoading}
         />
       </form>
       <ul className={styles.list}>
