@@ -1,3 +1,4 @@
 import { delay } from "./delay";
+import { swap } from "./swap";
 
-export { delay };
+export { delay, swap };

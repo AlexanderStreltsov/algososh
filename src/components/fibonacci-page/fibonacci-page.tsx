@@ -1,11 +1,11 @@
-import React, { useState, FormEvent } from "react";
-import styles from "./fibonacci.module.css";
+import React, { FC, useState, FormEvent } from "react";
 import { useForm } from "../../hooks";
+import { showFibonacciNumbers } from "./fibinacci-utils";
 import { SolutionLayout } from "../ui/solution-layout/solution-layout";
 import { Input } from "../ui/input/input";
 import { Button } from "../ui/button/button";
 import { Circle } from "../ui/circle/circle";
-import { showFibonacciNumbers } from "./utils";
+import styles from "./fibonacci.module.css";
 
 const defaultInputValues = {
   fibonacci: {
@@ -14,7 +14,7 @@ const defaultInputValues = {
   },
 };
 
-export const FibonacciPage: React.FC = () => {
+export const FibonacciPage: FC = () => {
   const { values, handleChange } = useForm(defaultInputValues);
   const { value } = values["fibonacci"];
 

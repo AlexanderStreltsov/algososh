@@ -1,25 +1,12 @@
 import { Dispatch, SetStateAction } from "react";
-import { ElementStates } from "../../types/element-states";
+import { ElementStates, type TDisplayingElement } from "../../types";
 import { DELAY_IN_MS } from "../../constants/delays";
-import { delay } from "../../utils";
-
-type TDisplayingElement = {
-  value: string;
-  state: ElementStates;
-};
+import { delay, swap } from "../../utils";
 
 const convertToArray = (value: string): TDisplayingElement[] =>
   value
     .split("")
     .map((item) => ({ value: item, state: ElementStates.Default }));
-
-const swap = (
-  arr: TDisplayingElement[],
-  firstIndex: number,
-  secondIndex: number
-) => {
-  [arr[firstIndex], arr[secondIndex]] = [arr[secondIndex], arr[firstIndex]];
-};
 
 const showReverseString = async (
   string: string,
@@ -52,4 +39,4 @@ const showReverseString = async (
   setLoading(false);
 };
 
-export { type TDisplayingElement, showReverseString };
+export { showReverseString };

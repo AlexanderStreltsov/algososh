@@ -1,11 +1,12 @@
-import React, { useState, FormEvent } from "react";
-import styles from "./string.module.css";
+import React, { FC, useState, FormEvent } from "react";
 import { useForm } from "../../hooks";
+import { type TDisplayingElement } from "../../types/displaying-element";
+import { showReverseString } from "./string-utils";
 import { SolutionLayout } from "../ui/solution-layout/solution-layout";
 import { Input } from "../ui/input/input";
 import { Button } from "../ui/button/button";
 import { Circle } from "../ui/circle/circle";
-import { type TDisplayingElement, showReverseString } from "./utils";
+import styles from "./string.module.css";
 
 const defaultInputValues = {
   string: {
@@ -13,13 +14,13 @@ const defaultInputValues = {
   },
 };
 
-export const StringComponent: React.FC = () => {
+export const StringComponent: FC = () => {
   const { values, handleChange } = useForm(defaultInputValues);
   const { value } = values["string"];
 
-  const [displayingElements, setDisplaying] = useState<
-    Array<TDisplayingElement>
-  >([]);
+  const [displayingElements, setDisplaying] = useState<TDisplayingElement[]>(
+    []
+  );
   const [isLoading, setLoading] = useState(false);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -49,7 +50,7 @@ export const StringComponent: React.FC = () => {
       <ul className={styles.list}>
         {displayingElements.map((element, index) => (
           <li key={index}>
-            <Circle state={element.state} letter={element.value} />
+            <Circle state={element.state} letter={`${element.value}`} />
           </li>
         ))}
       </ul>
