@@ -15,16 +15,14 @@ const defaultInputValues = {
   },
 };
 
-export interface IDisplayingStack extends IDisplayingElement {
-  top?: "top";
-}
-
 export const StackPage: FC = () => {
   const { values, setValues, handleChange } = useForm(defaultInputValues);
   const { value } = values["stack"];
 
-  const [stack] = useState(new Stack<IDisplayingStack>());
-  const [displayingElements, setDisplaying] = useState<IDisplayingStack[]>([]);
+  const [stack] = useState(new Stack<IDisplayingElement>());
+  const [displayingElements, setDisplaying] = useState<IDisplayingElement[]>(
+    []
+  );
   const [isLoading, setLoading] = useState(false);
   const [action, setAction] = useState<StackAction>();
 
@@ -93,7 +91,7 @@ export const StackPage: FC = () => {
             <Circle
               state={element.state}
               letter={`${element.value}`}
-              head={element?.top}
+              head={element?.head}
               index={index}
             />
           </li>

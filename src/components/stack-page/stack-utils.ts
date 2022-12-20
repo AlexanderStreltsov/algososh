@@ -1,24 +1,23 @@
 import { type Dispatch, type SetStateAction } from "react";
-import { ElementStates } from "../../types";
-import { type IDisplayingStack } from "./stack-page";
+import { ElementStates, type IDisplayingElement } from "../../types";
 import Stack from "./stack-init-class";
 import { SHORT_DELAY_IN_MS } from "../../constants/delays";
 import { delay } from "../../utils";
 
 const showPushElement = async (
-  stack: Stack<IDisplayingStack>,
+  stack: Stack<IDisplayingElement>,
   value: string,
-  setDisplaying: Dispatch<SetStateAction<IDisplayingStack[]>>,
+  setDisplaying: Dispatch<SetStateAction<IDisplayingElement[]>>,
   setLoading: Dispatch<SetStateAction<boolean>>
 ) => {
   setLoading(true);
 
   let peak = stack.peak();
   if (peak !== null) {
-    delete peak.top;
+    delete peak.head;
   }
 
-  stack.push({ value, state: ElementStates.Changing, top: "top" });
+  stack.push({ value, state: ElementStates.Changing, head: "top" });
   setDisplaying([...stack.getElements()]);
   await delay(SHORT_DELAY_IN_MS);
 
@@ -32,8 +31,8 @@ const showPushElement = async (
 };
 
 const showPopElement = async (
-  stack: Stack<IDisplayingStack>,
-  setDisplaying: Dispatch<SetStateAction<IDisplayingStack[]>>,
+  stack: Stack<IDisplayingElement>,
+  setDisplaying: Dispatch<SetStateAction<IDisplayingElement[]>>,
   setLoading: Dispatch<SetStateAction<boolean>>
 ) => {
   setLoading(true);
@@ -48,7 +47,7 @@ const showPopElement = async (
   stack.pop();
   peak = stack.peak();
   if (peak !== null) {
-    peak.top = "top";
+    peak.head = "top";
   }
   setDisplaying([...stack.getElements()]);
 
