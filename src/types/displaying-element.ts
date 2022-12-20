@@ -1,6 +1,6 @@
 import { ElementStates } from "./element-states";
 
-export type TDisplayingElement = {
+export interface IDisplayingElement {
   value: string | number;
   state: ElementStates;
-};
+}

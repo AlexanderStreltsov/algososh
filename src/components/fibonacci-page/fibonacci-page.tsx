@@ -1,4 +1,4 @@
-import React, { FC, useState, FormEvent } from "react";
+import React, { FC, useState, type FormEvent } from "react";
 import { useForm } from "../../hooks";
 import { showFibonacciNumbers } from "./fibinacci-utils";
 import { SolutionLayout } from "../ui/solution-layout/solution-layout";

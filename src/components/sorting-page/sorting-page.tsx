@@ -1,6 +1,6 @@
 import React, { FC, useState, useEffect } from "react";
 import {
-  type TDisplayingElement,
+  type IDisplayingElement,
   Direction,
   SortingName,
   ElementStates,
@@ -17,7 +17,7 @@ import { Column } from "../ui/column/column";
 import styles from "./sorting.module.css";
 
 export const SortingPage: FC = () => {
-  const [displayingElements, setDisplaying] = useState<TDisplayingElement[]>(
+  const [displayingElements, setDisplaying] = useState<IDisplayingElement[]>(
     []
   );
   const [sortingName, setSortingName] = useState<SortingName>(
@@ -90,7 +90,7 @@ export const SortingPage: FC = () => {
         </div>
         <Button
           text="Новый массив"
-          onClick={() => handleCreateRandomArr()}
+          onClick={handleCreateRandomArr}
           disabled={isLoading}
         />
       </div>

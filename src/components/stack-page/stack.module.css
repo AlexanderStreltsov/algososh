@@ -1,0 +1,33 @@
+.form {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.form > div {
+  width: 377px;
+}
+
+.controls {
+  margin: 0;
+  padding: 0;
+  border: none;
+  display: flex;
+  gap: 80px;
+}
+
+.controls > div {
+  display: flex;
+  gap: 12px;
+}
+
+.list {
+  margin: 78px auto 0;
+  padding: 0;
+  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 16px;
+  row-gap: 78px;
+  max-width: 944px;
+}

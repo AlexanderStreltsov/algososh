@@ -1,6 +1,6 @@
-import React, { FC, useState, FormEvent } from "react";
+import React, { FC, useState, type FormEvent } from "react";
 import { useForm } from "../../hooks";
-import { type TDisplayingElement } from "../../types/displaying-element";
+import { type IDisplayingElement } from "../../types";
 import { showReverseString } from "./string-utils";
 import { SolutionLayout } from "../ui/solution-layout/solution-layout";
 import { Input } from "../ui/input/input";
@@ -18,7 +18,7 @@ export const StringComponent: FC = () => {
   const { values, handleChange } = useForm(defaultInputValues);
   const { value } = values["string"];
 
-  const [displayingElements, setDisplaying] = useState<TDisplayingElement[]>(
+  const [displayingElements, setDisplaying] = useState<IDisplayingElement[]>(
     []
   );
   const [isLoading, setLoading] = useState(false);

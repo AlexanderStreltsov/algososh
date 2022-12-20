@@ -1,12 +1,12 @@
-import { Dispatch, SetStateAction } from "react";
-import { ElementStates, Direction, type TDisplayingElement } from "../../types";
+import { type Dispatch, type SetStateAction } from "react";
+import { ElementStates, Direction, type IDisplayingElement } from "../../types";
 import { DELAY_IN_MS } from "../../constants/delays";
 import { delay, swap } from "../../utils";
 
 const getRandomInteger = (min: number, max: number) =>
   Math.floor(Math.random() * (max - min + 1)) + min;
 
-const createRandomArr = (): TDisplayingElement[] => {
+const createRandomArr = (): IDisplayingElement[] => {
   const arr = [];
   let length = getRandomInteger(3, 17);
 
@@ -19,8 +19,8 @@ const createRandomArr = (): TDisplayingElement[] => {
 };
 
 const showBubleSorting = async (
-  arr: TDisplayingElement[],
-  setDisplaying: Dispatch<SetStateAction<TDisplayingElement[]>>,
+  arr: IDisplayingElement[],
+  setDisplaying: Dispatch<SetStateAction<IDisplayingElement[]>>,
   setLoading: Dispatch<SetStateAction<boolean>>,
   direction: Direction
 ) => {
@@ -31,7 +31,6 @@ const showBubleSorting = async (
     for (let j = 0; j < length - i - 1; j++) {
       arr[j].state = ElementStates.Changing;
       arr[j + 1].state = ElementStates.Changing;
-
       setDisplaying([...arr]);
       await delay(DELAY_IN_MS);
 
@@ -47,7 +46,6 @@ const showBubleSorting = async (
     }
 
     arr[length - i - 1].state = ElementStates.Modified;
-
     setDisplaying([...arr]);
     await delay(DELAY_IN_MS);
   }
@@ -56,22 +54,20 @@ const showBubleSorting = async (
 };
 
 const showSelectionSorting = async (
-  arr: TDisplayingElement[],
-  setDisplaying: Dispatch<SetStateAction<TDisplayingElement[]>>,
+  arr: IDisplayingElement[],
+  setDisplaying: Dispatch<SetStateAction<IDisplayingElement[]>>,
   setLoading: Dispatch<SetStateAction<boolean>>,
   direction: Direction
 ) => {
   setLoading(true);
 
   const length = arr.length;
-
   for (let i = 0; i < length - 1; i++) {
     arr[i].state = ElementStates.Changing;
 
     let controlIndex = i;
     for (let j = i + 1; j < length; j++) {
       arr[j].state = ElementStates.Changing;
-
       setDisplaying([...arr]);
       await delay(DELAY_IN_MS);
 

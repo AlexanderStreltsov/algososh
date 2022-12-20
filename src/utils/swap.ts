@@ -1,7 +1,7 @@
-import { type TDisplayingElement } from "../types/displaying-element";
+import { type IDisplayingElement } from "../types/displaying-element";
 
 export const swap = (
-  arr: TDisplayingElement[],
+  arr: IDisplayingElement[],
   firstIndex: number,
   secondIndex: number
 ) => {
