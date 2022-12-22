@@ -1,0 +1,39 @@
+.controls {
+  display: flex;
+  align-items: center;
+  max-width: 924px;
+  margin: 0 auto;
+}
+
+.radio {
+  display: flex;
+  gap: 40px;
+}
+
+.sorting {
+  display: flex;
+  gap: 12px;
+  margin: 0 80px 0 52px;
+}
+
+.sorting button:first-child {
+  width: 205px;
+}
+
+.sorting button:last-child {
+  width: 186px;
+}
+
+.list {
+  margin: 48px 0 0;
+  padding: 0;
+  list-style-type: none;
+  min-height: 320px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.list > li {
+  align-self: flex-end;
+}
