@@ -23,7 +23,7 @@ const defaultInputValues: TFormInputs = {
   },
   listIndex: {
     value: "",
-    pattern: /^[0-6]$/,
+    pattern: /^[0-5]$/,
   },
 };
 
@@ -60,6 +60,7 @@ export const ListPage: FC = () => {
 
   const handleAddByIndex = () => {
     setAction(ListActions.AddByIndex);
+    setValues(defaultInputValues);
     const index = +listIndexValue;
     showAddByIndex(
       linkedList,
@@ -72,6 +73,7 @@ export const ListPage: FC = () => {
 
   const handleDeleteByIndex = () => {
     setAction(ListActions.DeleteByIndex);
+    setValues(defaultInputValues);
     const index = +listIndexValue;
     showDeleteByIndex(linkedList, index, setDisplaying, setLoading);
   };
