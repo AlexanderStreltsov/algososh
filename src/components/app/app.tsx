@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, HashRouter, Route, Switch } from "react-router-dom";
 import { FibonacciPage } from "../fibonacci-page/fibonacci-page";
 import { ListPage } from "../list-page/list-page";
 import { MainPage } from "../main-page/main-page";
@@ -10,10 +10,12 @@ import { StackPage } from "../stack-page/stack-page";
 
 import "./app.css";
 
+const Router: Function = process.env.PUBLIC_URL ? HashRouter : BrowserRouter;
+
 function App() {
   return (
     <div className="app">
-      <BrowserRouter>
+      <Router>
         <Switch>
           <Route path="/" exact>
             <MainPage />
@@ -37,7 +39,7 @@ function App() {
             <ListPage />
           </Route>
         </Switch>
-      </BrowserRouter>
+      </Router>
     </div>
   );
 }
