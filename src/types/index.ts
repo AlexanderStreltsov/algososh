@@ -2,14 +2,16 @@ import { Direction } from "./direction";
 import { ElementStates } from "./element-states";
 import { type IDisplayingElement } from "./displaying-element";
 import { SortingName } from "./sorting-name";
-import { StackAction } from "./stack-action";
-import { QueueAction } from "./queue-actions";
+import { StackActions } from "./stack-actions";
+import { QueueActions } from "./queue-actions";
+import { ListActions } from "./list-actions";
 
 export {
   Direction,
   ElementStates,
   SortingName,
-  StackAction,
-  QueueAction,
+  StackActions,
+  QueueActions,
+  ListActions,
   type IDisplayingElement,
 };

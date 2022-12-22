@@ -1,13 +1,13 @@
 import React, { FC, useState, type FormEvent } from "react";
-import { useForm } from "../../hooks";
-import { showFibonacciNumbers } from "./fibinacci-utils";
+import { type TFormInputs, useForm } from "../../hooks";
+import { showFibonacciNumbers } from "./fibonacci-utils";
 import { SolutionLayout } from "../ui/solution-layout/solution-layout";
 import { Input } from "../ui/input/input";
 import { Button } from "../ui/button/button";
 import { Circle } from "../ui/circle/circle";
 import styles from "./fibonacci.module.css";
 
-const defaultInputValues = {
+const defaultInputValues: TFormInputs = {
   fibonacci: {
     value: "",
     pattern: /^[1-9]$|^0[1-9]$|^1[0-9]$/,

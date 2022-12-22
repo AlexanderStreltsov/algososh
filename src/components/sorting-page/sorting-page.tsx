@@ -5,11 +5,9 @@ import {
   SortingName,
   ElementStates,
 } from "../../types";
-import {
-  createRandomArr,
-  showBubleSorting,
-  showSelectionSorting,
-} from "./sorting-utils";
+import { createRandomDisplayingArr } from "../../utils";
+import { showBubleSorting, showSelectionSorting } from "./sorting-utils";
+import { MIN_SORTING_SIZE, MAX_SORTING_SIZE } from "../../constants/sizes";
 import { SolutionLayout } from "../ui/solution-layout/solution-layout";
 import { RadioInput } from "../../components/ui/radio-input/radio-input";
 import { Button } from "../ui/button/button";
@@ -44,12 +42,16 @@ export const SortingPage: FC = () => {
 
   const handleCreateRandomArr = () => {
     setLoading(true);
-    setDisplaying(createRandomArr());
+    setDisplaying(
+      createRandomDisplayingArr(MIN_SORTING_SIZE, MAX_SORTING_SIZE)
+    );
     setLoading(false);
   };
 
   useEffect(() => {
-    setDisplaying(createRandomArr());
+    setDisplaying(
+      createRandomDisplayingArr(MIN_SORTING_SIZE, MAX_SORTING_SIZE)
+    );
     return () => setDisplaying([]);
   }, []);
 

@@ -1,8 +1,9 @@
 import { type Dispatch, type SetStateAction } from "react";
 import { ElementStates, type IDisplayingElement } from "../../types";
-import Stack from "./stack-init-class";
+import Stack from "./stack-class";
 import { SHORT_DELAY_IN_MS } from "../../constants/delays";
 import { delay } from "../../utils";
+import { TOP } from "../../constants/element-captions";
 
 const showPushElement = async (
   stack: Stack<IDisplayingElement>,
@@ -17,7 +18,7 @@ const showPushElement = async (
     delete peak.head;
   }
 
-  stack.push({ value, state: ElementStates.Changing, head: "top" });
+  stack.push({ value, state: ElementStates.Changing, head: TOP });
   setDisplaying([...stack.getElements()]);
   await delay(SHORT_DELAY_IN_MS);
 
@@ -47,7 +48,7 @@ const showPopElement = async (
   stack.pop();
   peak = stack.peak();
   if (peak !== null) {
-    peak.head = "top";
+    peak.head = TOP;
   }
   setDisplaying([...stack.getElements()]);
 

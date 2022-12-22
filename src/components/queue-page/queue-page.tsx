@@ -1,63 +1,52 @@
 import React, { FC, useState, type FormEvent } from "react";
-import { useForm } from "../../hooks";
-import {
-  type IDisplayingElement,
-  ElementStates,
-  QueueAction,
-} from "../../types";
-import Queue from "./queue-init-class";
-import { showEnqueue, showDequeue } from "./queue-utils";
+import { type TFormInputs, useForm } from "../../hooks";
+import { type IDisplayingElement, QueueActions } from "../../types";
+import Queue from "./queue-class";
+import { createDefaultQueueArr, showEnqueue, showDequeue } from "./queue-utils";
+import { MAX_QUEUE_SIZE } from "../../constants/sizes";
 import { SolutionLayout } from "../ui/solution-layout/solution-layout";
 import { Input } from "../ui/input/input";
 import { Button } from "../ui/button/button";
 import { Circle } from "../ui/circle/circle";
 import styles from "./queue.module.css";
 
-const defaultInputValues = {
+const defaultInputValues: TFormInputs = {
   queue: {
     value: "",
   },
 };
 
-const defautQueueSize: number = 7;
-
-const defaultQueue: IDisplayingElement[] = [...Array(defautQueueSize)].map(
-  () => ({
-    value: "",
-    state: ElementStates.Default,
-  })
-);
-
 export const QueuePage: FC = () => {
   const { values, setValues, handleChange } = useForm(defaultInputValues);
   const { value } = values["queue"];
 
-  const [queue] = useState(new Queue<IDisplayingElement>(defautQueueSize));
+  const [queue] = useState(new Queue<IDisplayingElement>(MAX_QUEUE_SIZE));
 
-  const [displayingElements, setDisplaying] =
-    useState<IDisplayingElement[]>(defaultQueue);
+  const [displayingElements, setDisplaying] = useState<IDisplayingElement[]>(
+    createDefaultQueueArr(MAX_QUEUE_SIZE)
+  );
 
   const [isLoading, setLoading] = useState(false);
-  const [action, setAction] = useState<QueueAction>();
+  const [action, setAction] = useState<QueueActions>();
 
   const handleEnqueue = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setAction(QueueAction.Enqueue);
+    setAction(QueueActions.Enqueue);
     setValues(defaultInputValues);
     showEnqueue(queue, value, setDisplaying, setLoading);
   };
 
   const handleDequeue = () => {
-    setAction(QueueAction.Dequeue);
+    setAction(QueueActions.Dequeue);
     showDequeue(queue, setDisplaying, setLoading);
   };
 
   const handleClear = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setLoading(true);
-    setAction(QueueAction.Clear);
+    setAction(QueueActions.Clear);
     queue.clear();
-    setDisplaying(defaultQueue);
+    setDisplaying(createDefaultQueueArr(MAX_QUEUE_SIZE));
     setLoading(false);
   };
 
@@ -84,20 +73,20 @@ export const QueuePage: FC = () => {
             <Button
               text="Добавить"
               type="submit"
-              isLoader={action === QueueAction.Enqueue && isLoading}
-              disabled={!value || queueLength === defautQueueSize || isLoading}
+              isLoader={action === QueueActions.Enqueue && isLoading}
+              disabled={!value || queueLength === MAX_QUEUE_SIZE || isLoading}
             />
             <Button
               text="Удалить"
               onClick={handleDequeue}
-              isLoader={action === QueueAction.Dequeue && isLoading}
+              isLoader={action === QueueActions.Dequeue && isLoading}
               disabled={!queueLength || isLoading}
             />
           </div>
           <Button
             text="Очистить"
             type="reset"
-            isLoader={action === QueueAction.Clear && isLoading}
+            isLoader={action === QueueActions.Clear && isLoading}
             disabled={!queueLength || isLoading}
           />
         </fieldset>

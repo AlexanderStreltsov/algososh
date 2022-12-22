@@ -1,8 +1,15 @@
 import { type Dispatch, type SetStateAction } from "react";
 import { ElementStates, type IDisplayingElement } from "../../types";
-import Queue from "./queue-init-class";
+import Queue from "./queue-class";
 import { SHORT_DELAY_IN_MS } from "../../constants/delays";
+import { HEAD, TAIL } from "../../constants/element-captions";
 import { delay } from "../../utils";
+
+const createDefaultQueueArr = (size: number): IDisplayingElement[] =>
+  [...Array(size)].map(() => ({
+    value: "",
+    state: ElementStates.Default,
+  }));
 
 const convertForDisplay = (queue: Queue<IDisplayingElement>) =>
   queue
@@ -29,17 +36,18 @@ const showEnqueue = async (
     if (tailElBeforeEnqueue !== null) {
       delete tailElBeforeEnqueue.tail;
     }
-    tailElement.value = value;
-    tailElement.tail = "tail";
-    if (queue.getLength() === 1) tailElement.head = "head";
-  }
-  setDisplaying([...convertForDisplay(queue)]);
-  await delay(SHORT_DELAY_IN_MS);
 
-  if (tailElement !== null) {
+    tailElement.value = value;
+    tailElement.tail = TAIL;
+    if (queue.getLength() === 1) tailElement.head = HEAD;
+
+    setDisplaying([...convertForDisplay(queue)]);
+    await delay(SHORT_DELAY_IN_MS);
+
     tailElement.state = ElementStates.Default;
+
+    setDisplaying([...convertForDisplay(queue)]);
   }
-  setDisplaying([...convertForDisplay(queue)]);
 
   setLoading(false);
 };
@@ -54,18 +62,18 @@ const showDequeue = async (
   const peakElementBeforeDequeue = queue.peak();
   if (peakElementBeforeDequeue !== null) {
     peakElementBeforeDequeue.state = ElementStates.Changing;
+    setDisplaying([...convertForDisplay(queue)]);
+    await delay(SHORT_DELAY_IN_MS);
   }
-  setDisplaying([...convertForDisplay(queue)]);
-  await delay(SHORT_DELAY_IN_MS);
 
   queue.dequeue();
   let peakElement = queue.peak();
   if (peakElement !== null) {
-    peakElement.head = "head";
+    peakElement.head = HEAD;
   }
   setDisplaying([...convertForDisplay(queue)]);
 
   setLoading(false);
 };
 
-export { showEnqueue, showDequeue };
+export { createDefaultQueueArr, showEnqueue, showDequeue };

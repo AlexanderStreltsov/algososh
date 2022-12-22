@@ -1,15 +1,15 @@
 import React, { FC, useState, type FormEvent } from "react";
-import { useForm } from "../../hooks";
-import { type IDisplayingElement, StackAction } from "../../types";
+import { type TFormInputs, useForm } from "../../hooks";
+import { type IDisplayingElement, StackActions } from "../../types";
 import { showPushElement, showPopElement } from "./stack-utils";
-import Stack from "./stack-init-class";
+import Stack from "./stack-class";
 import { SolutionLayout } from "../ui/solution-layout/solution-layout";
 import { Input } from "../ui/input/input";
 import { Button } from "../ui/button/button";
 import { Circle } from "../ui/circle/circle";
 import styles from "./stack.module.css";
 
-const defaultInputValues = {
+const defaultInputValues: TFormInputs = {
   stack: {
     value: "",
   },
@@ -24,24 +24,24 @@ export const StackPage: FC = () => {
     []
   );
   const [isLoading, setLoading] = useState(false);
-  const [action, setAction] = useState<StackAction>();
+  const [action, setAction] = useState<StackActions>();
 
   const handlePush = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setAction(StackAction.Push);
+    setAction(StackActions.Push);
     setValues(defaultInputValues);
     showPushElement(stack, value, setDisplaying, setLoading);
   };
 
   const handlePop = () => {
-    setAction(StackAction.Pop);
+    setAction(StackActions.Pop);
     showPopElement(stack, setDisplaying, setLoading);
   };
 
   const handleClear = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setLoading(true);
-    setAction(StackAction.Clear);
+    setAction(StackActions.Clear);
     stack.clear();
     setDisplaying([...stack.getElements()]);
     setLoading(false);
@@ -67,20 +67,20 @@ export const StackPage: FC = () => {
             <Button
               text="Добавить"
               type="submit"
-              isLoader={action === StackAction.Push && isLoading}
+              isLoader={action === StackActions.Push && isLoading}
               disabled={!value || isLoading}
             />
             <Button
               text="Удалить"
               onClick={handlePop}
-              isLoader={action === StackAction.Pop && isLoading}
+              isLoader={action === StackActions.Pop && isLoading}
               disabled={!size || isLoading}
             />
           </div>
           <Button
             text="Очистить"
             type="reset"
-            isLoader={action === StackAction.Clear && isLoading}
+            isLoader={action === StackActions.Clear && isLoading}
             disabled={!size || isLoading}
           />
         </fieldset>

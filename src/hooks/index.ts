@@ -1,3 +1,3 @@
-import useForm from "./useForm";
+import { useForm, type TFormInputs } from "./useForm";
 
-export { useForm };
+export { useForm, type TFormInputs };

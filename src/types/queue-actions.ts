@@ -1,4 +1,4 @@
-export enum QueueAction {
+export enum QueueActions {
   Enqueue = "enqueue",
   Dequeue = "dequeue",
   Clear = "clear",

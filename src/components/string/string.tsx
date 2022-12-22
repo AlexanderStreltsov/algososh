@@ -1,5 +1,5 @@
 import React, { FC, useState, type FormEvent } from "react";
-import { useForm } from "../../hooks";
+import { type TFormInputs, useForm } from "../../hooks";
 import { type IDisplayingElement } from "../../types";
 import { showReverseString } from "./string-utils";
 import { SolutionLayout } from "../ui/solution-layout/solution-layout";
@@ -8,7 +8,7 @@ import { Button } from "../ui/button/button";
 import { Circle } from "../ui/circle/circle";
 import styles from "./string.module.css";
 
-const defaultInputValues = {
+const defaultInputValues: TFormInputs = {
   string: {
     value: "",
   },

@@ -3,21 +3,6 @@ import { ElementStates, Direction, type IDisplayingElement } from "../../types";
 import { DELAY_IN_MS } from "../../constants/delays";
 import { delay, swap } from "../../utils";
 
-const getRandomInteger = (min: number, max: number) =>
-  Math.floor(Math.random() * (max - min + 1)) + min;
-
-const createRandomArr = (): IDisplayingElement[] => {
-  const arr = [];
-  let length = getRandomInteger(3, 17);
-
-  while (length > 0) {
-    arr.push({ value: getRandomInteger(0, 100), state: ElementStates.Default });
-    length--;
-  }
-
-  return arr;
-};
-
 const showBubleSorting = async (
   arr: IDisplayingElement[],
   setDisplaying: Dispatch<SetStateAction<IDisplayingElement[]>>,
@@ -95,4 +80,4 @@ const showSelectionSorting = async (
   setLoading(false);
 };
 
-export { createRandomArr, showBubleSorting, showSelectionSorting };
+export { showBubleSorting, showSelectionSorting };

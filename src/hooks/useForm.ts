@@ -1,13 +1,13 @@
 import { useState, type ChangeEvent } from "react";
 
-type TFormInputs = {
+export type TFormInputs = {
   [name: string]: {
     value: string;
     pattern?: RegExp;
   };
 };
 
-const useForm = (inputValues: TFormInputs) => {
+export const useForm = (inputValues: TFormInputs) => {
   const [values, setValues] = useState(inputValues);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -21,5 +21,3 @@ const useForm = (inputValues: TFormInputs) => {
 
   return { values, setValues, handleChange };
 };
-
-export default useForm;
