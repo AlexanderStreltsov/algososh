@@ -74,8 +74,10 @@ const showSelectionSorting = async (
     arr[i].state = ElementStates.Modified;
   }
 
-  arr[length - 1].state = ElementStates.Modified;
-  setDisplaying([...arr]);
+  if (length) {
+    arr[length - 1].state = ElementStates.Modified;
+    setDisplaying([...arr]);
+  }
 
   setLoading(false);
 };
