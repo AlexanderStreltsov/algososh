@@ -297,9 +297,14 @@ const setChangingBeforeDeleteByIndex = async (
 
 const setDefaultAfterDeleteByIndex = (array: IDisplayingElement[]) => {
   array.forEach((element, index) => {
+    if (index === 0) {
+      element.head = HEAD;
+    }
+
     if (index === array.length - 1) {
       element.tail = TAIL;
     }
+
     element.state = ElementStates.Default;
   });
 };
